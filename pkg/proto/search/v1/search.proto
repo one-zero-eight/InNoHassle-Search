@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package search.v1;
+option go_package = "github.com/one-zero-eight/Search/pkg/proto/v1/pb";
+
+service SearchService {
+    rpc Ping(PingRequest) returns (PingResponse);
+}
+
+message PingRequest {}
+message PingResponse {
+    string messsage = 1;
+}
