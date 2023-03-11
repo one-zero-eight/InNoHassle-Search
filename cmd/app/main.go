@@ -25,9 +25,11 @@ func main() {
 	mux.Handle(path, handler)
 
 	fmt.Printf("listening on %s\n", cfg.Server.Address)
-	http.ListenAndServe(
+	if err := http.ListenAndServe(
 		cfg.Server.Address,
-		// Use h2c so we can serve HTTP/2 without TLS.
+		// Use h2c, so we can serve HTTP/2 without TLS.
 		h2c.NewHandler(mux, &http2.Server{}),
-	)
+	); err != nil {
+		log.Fatalln("failed to serve")
+	}
 }
