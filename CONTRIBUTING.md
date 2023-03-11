@@ -30,7 +30,7 @@ Code generated from protobuf definitions at `/pkg/proto`.
 See [gRPC section](#grpc) for more information.
 
 ## Migrations
-We're using a (goose)[https://github.com/pressly/goose] as a migration tool.
+We use a [goose](https://github.com/pressly/goose) as a migration tool.
 Make sure it is installed and is in your PATH.
 
 Migrations are stored in the `/migrations` directory.
