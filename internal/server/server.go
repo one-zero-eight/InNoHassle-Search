@@ -17,7 +17,7 @@ func (s *SearchServer) Ping(
 ) (*connect.Response[pb.PingResponse], error) {
 	log.Println("Request headers: ", req.Header())
 	res := connect.NewResponse(&pb.PingResponse{
-		Messsage: "pong",
+		Message: "pong",
 	})
 	res.Header().Set("Search-Version", "v1")
 	return res, nil

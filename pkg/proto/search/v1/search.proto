@@ -8,5 +8,5 @@ service SearchService {
 
 message PingRequest {}
 message PingResponse {
-    string messsage = 1;
+    string message = 1;
 }
