@@ -1,0 +1,46 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+
+# Compiled Go binary files
+*.exe
+*.test
+*.prof
+
+# Generated documentation
+/doc
+/site
+/docs
+
+# Binaries for programs and plugins
+/bin
+/release
+/dist
+
+# Test binary, build with go test -c
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Ignore vendor directory
+vendor/
+
+# Ignore Go Modules directory
+/go.mod
+/go.sum
+
+# Ignore any local configuration files
+*.env
+*.local
+*.cfg
+*.conf
+*.ini
+
+# IntelliJ IDEA project files
+.idea/
+*.iml
+
+# Compiled output
+/out/
