@@ -39,13 +39,13 @@ lint: golangci-lint-installed  ## run linters
 # Helpers
 
 .PHONY: golangci-lint-installed
-golangci-lint:
+golangci-lint-installed:
 ifndef GOLANGCI_LINT_VERSION
 	@echo "golangci-lint is not installed (https://golangci-lint.run/usage/install/)" && exit 1
 endif
 
 .PHONY: gooose-installed
-gooose-installed:
+goose-installed:
 ifndef GOOSE_VERSION
 	@echo "goose is not installed (https://pressly.github.io/goose/)" && exit 1
 endif
