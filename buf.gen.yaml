@@ -1,0 +1,12 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/one-zero-eight/Search/pkg/pb
+plugins:
+  - plugin: buf.build/protocolbuffers/go
+    out: pkg/pb
+    opt: paths=source_relative
+  - plugin: buf.build/bufbuild/connect-go
+    out: pkg/pb
+    opt: paths=source_relative

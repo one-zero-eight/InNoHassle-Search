@@ -1,0 +1,6 @@
+postgres:
+  database: search
+  user: search_user
+  password: search_password
+server:
+  address: :8080
