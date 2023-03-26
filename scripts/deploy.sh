@@ -1,32 +1,34 @@
 #!/usr/bin/env bash
 
+# Attention: this script should be manually synced with the server!
+
 LOGS_ROOT=/home/ubuntu/logs
 ALL_DEPLOYMENTS_ROOT=/home/ubuntu/deployments
 DEPLOYMENT_ROOT="$ALL_DEPLOYMENTS_ROOT/search-engine"
 LOG_PATH="$LOGS_ROOT/deploy-search-engine.log"
 
 function logmsg {
-  echo "$(date +'%d-%m-%Y %H:%M:%S.%N') — $1" >> $LOG_PATH
+  echo "$(date +'%d-%m-%Y %H:%M:%S.%N') — $1" >> "$LOG_PATH"
 }
 
 # log commands on execution
 set +x
 
-logmsg "Deployment triggered"
-
 # create necessary directories
 mkdir -p "$LOGS_ROOT" "$ALL_DEPLOYMENTS_ROOT"
+
+logmsg "Deployment triggered"
 
 # remove old deployment files
 rm -rf "$DEPLOYMENT_ROOT"
 
 # clone the repository
 logmsg "Cloning repository..."
-git clone --depth 0 https://github.com/one-zero-eight/InNoHassle-Search "$DEPLOYMENT_ROOT"
+git clone --depth=1 https://github.com/one-zero-eight/InNoHassle-Search "$DEPLOYMENT_ROOT"
 
 # check Docker is running
 if ! docker info > /dev/null 2>&1; then
-  echo "$(date +'%d-%m-%Y %H:%M:%S.%N') — Docker is not running, exiting..."
+  logmsg "Docker is not running, exiting..."
   exit 1
 fi
 
