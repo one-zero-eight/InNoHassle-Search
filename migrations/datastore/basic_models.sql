@@ -1,5 +1,5 @@
 create table contact (
-    id bigint primary key,
+    id bigint primary key generated always as identity,
     name varchar not null,
     telegram_id bigint unique,
     telegram_alias varchar unique,
@@ -25,7 +25,7 @@ comment on table university_room is 'Помещение в иннополисе'
 comment on column university_room.room_number is 'Номер помещения';
 
 create table schedule (
-    id bigint primary key,
+    id bigint primary key generated always as identity,
     name varchar not null,
     cron varchar not null,
     start_time timestamp not null,
@@ -42,7 +42,7 @@ create table tag (
 comment on table tag is 'Теги';
 
 create table internet_resource (
-    id bigint primary key,
+    id bigint primary key generated always as identity,
     link varchar not null unique,
     name varchar not null,
     preview bytea,
@@ -68,14 +68,14 @@ create table club_contact (
 comment on table club is 'Описание клуба';
 
 create table name (
-    id bigint primary key,
+    id bigint primary key generated always as identity,
     first_name varchar not null,
     second_name varchar not null,
     middle_name varchar
 );
 
 create table teacher (
-    id bigint primary key,
+    id bigint primary key generated always as identity,
     name_id bigint not null references name,
     contact_id bigint references contact,
     office varchar references university_room
@@ -84,7 +84,7 @@ create table teacher (
 comment on table teacher is 'Описание преподавателя (TA/Prof)';
 
 create table grading (
-    id bigint primary key
+    id bigint primary key generated always as identity
 );
 
 create table grades_threshold (
@@ -136,7 +136,7 @@ create table teacher_course (
 );
 
 create table events (
-    id bigint primary key,
+    id bigint primary key generated always as identity,
     name varchar not null,
     preview bytea,
     event_start timestamp not null,
@@ -155,13 +155,13 @@ create table dorm (
 comment on table dorm is 'Описание общаги';
 
 create table location (
-    id bigint primary key,
+    id bigint primary key generated always as identity,
     latitude double precision not null,
     longitude double precision not null
 );
 
 create table organization (
-    id bigint primary key,
+    id bigint primary key generated always as identity,
     name varchar not null,
     location_id bigint references location,
     schedule_id bigint references schedule,
