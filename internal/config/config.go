@@ -15,7 +15,12 @@ var (
 // Config is a struct that contains all the configuration parameters.
 type Config struct {
 	Server struct {
-		Address string `yaml:"address"`
+		Address  string `yaml:"address"`
+		CertFile string `yaml:"cert-file"`
+		KeyFile  string `yaml:"key-file"`
+	}
+	Postgres struct {
+		Dsn string `yaml:"dsn"`
 	}
 }
 

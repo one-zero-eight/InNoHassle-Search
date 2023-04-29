@@ -1,6 +1,6 @@
 postgres:
-  database: search
-  user: search_user
-  password: search_password
+  dsn: postgres://search_user:search_password@postgres:5432/search?sslmode=disable
 server:
   address: :8080
+  cert-file: certs/cert.pem
+  key-file: certs/key.pem
