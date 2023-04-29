@@ -17,6 +17,7 @@ WORKDIR /
 
 COPY --from=builder /bin/app ./
 COPY --from=builder /src/config.yaml ./
+COPY --from=builder /src/certs ./certs
 
 EXPOSE 8080
 
