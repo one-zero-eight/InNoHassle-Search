@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package search.v1;
+
+service SearchService {
+    rpc AddRecord(AddRecordRequest) returns (AddRecordResponse);
+}
+
+message AddRecordRequest {
+    oneof record {
+        TelegramChannelPost telegram_channel_post = 1;
+    }
+}
+
+message AddRecordResponse {}
+
+message TelegramChannelPost {
+    string channel_name = 1;
+    string channel_username = 2;
+    int64 message_id = 3;
+    uint64 message_date = 4;
+    string message_text = 5;
+}

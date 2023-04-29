@@ -25,9 +25,21 @@ const (
 	SearchServiceName = "search.v1.SearchService"
 )
 
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+//
+// Note that these are different from the fully-qualified method names used by
+// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
+// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
+// period.
+const (
+	// SearchServiceAddRecordProcedure is the fully-qualified name of the SearchService's AddRecord RPC.
+	SearchServiceAddRecordProcedure = "/search.v1.SearchService/AddRecord"
+)
+
 // SearchServiceClient is a client for the search.v1.SearchService service.
 type SearchServiceClient interface {
-	Ping(context.Context, *connect_go.Request[v1.PingRequest]) (*connect_go.Response[v1.PingResponse], error)
+	AddRecord(context.Context, *connect_go.Request[v1.AddRecordRequest]) (*connect_go.Response[v1.AddRecordResponse], error)
 }
 
 // NewSearchServiceClient constructs a client for the search.v1.SearchService service. By default,
@@ -40,9 +52,9 @@ type SearchServiceClient interface {
 func NewSearchServiceClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) SearchServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &searchServiceClient{
-		ping: connect_go.NewClient[v1.PingRequest, v1.PingResponse](
+		addRecord: connect_go.NewClient[v1.AddRecordRequest, v1.AddRecordResponse](
 			httpClient,
-			baseURL+"/search.v1.SearchService/Ping",
+			baseURL+SearchServiceAddRecordProcedure,
 			opts...,
 		),
 	}
@@ -50,17 +62,17 @@ func NewSearchServiceClient(httpClient connect_go.HTTPClient, baseURL string, op
 
 // searchServiceClient implements SearchServiceClient.
 type searchServiceClient struct {
-	ping *connect_go.Client[v1.PingRequest, v1.PingResponse]
+	addRecord *connect_go.Client[v1.AddRecordRequest, v1.AddRecordResponse]
 }
 
-// Ping calls search.v1.SearchService.Ping.
-func (c *searchServiceClient) Ping(ctx context.Context, req *connect_go.Request[v1.PingRequest]) (*connect_go.Response[v1.PingResponse], error) {
-	return c.ping.CallUnary(ctx, req)
+// AddRecord calls search.v1.SearchService.AddRecord.
+func (c *searchServiceClient) AddRecord(ctx context.Context, req *connect_go.Request[v1.AddRecordRequest]) (*connect_go.Response[v1.AddRecordResponse], error) {
+	return c.addRecord.CallUnary(ctx, req)
 }
 
 // SearchServiceHandler is an implementation of the search.v1.SearchService service.
 type SearchServiceHandler interface {
-	Ping(context.Context, *connect_go.Request[v1.PingRequest]) (*connect_go.Response[v1.PingResponse], error)
+	AddRecord(context.Context, *connect_go.Request[v1.AddRecordRequest]) (*connect_go.Response[v1.AddRecordResponse], error)
 }
 
 // NewSearchServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -70,9 +82,9 @@ type SearchServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewSearchServiceHandler(svc SearchServiceHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
 	mux := http.NewServeMux()
-	mux.Handle("/search.v1.SearchService/Ping", connect_go.NewUnaryHandler(
-		"/search.v1.SearchService/Ping",
-		svc.Ping,
+	mux.Handle(SearchServiceAddRecordProcedure, connect_go.NewUnaryHandler(
+		SearchServiceAddRecordProcedure,
+		svc.AddRecord,
 		opts...,
 	))
 	return "/search.v1.SearchService/", mux
@@ -81,6 +93,6 @@ func NewSearchServiceHandler(svc SearchServiceHandler, opts ...connect_go.Handle
 // UnimplementedSearchServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedSearchServiceHandler struct{}
 
-func (UnimplementedSearchServiceHandler) Ping(context.Context, *connect_go.Request[v1.PingRequest]) (*connect_go.Response[v1.PingResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("search.v1.SearchService.Ping is not implemented"))
+func (UnimplementedSearchServiceHandler) AddRecord(context.Context, *connect_go.Request[v1.AddRecordRequest]) (*connect_go.Response[v1.AddRecordResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("search.v1.SearchService.AddRecord is not implemented"))
 }
